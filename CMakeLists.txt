@@ -11,6 +11,8 @@ qt_add_executable(MakePlayList
     mainwindow.cpp
     mainwindow.h
     mainwindow.ui
+    plsfiles.cpp
+    plsfiles.h
 )
 
 target_link_libraries(MakePlayList
