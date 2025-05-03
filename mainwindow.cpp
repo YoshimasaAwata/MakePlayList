@@ -19,6 +19,7 @@ void MainWindow::on_closeButton_clicked() {
 void MainWindow::on_addButton_clicked() {
   auto dir = QFileDialog::getExistingDirectory(this, tr("フォルダの選択"));
   if (!dir.isEmpty()) {
-    plsfiles_.F
+    plsfiles_.AddFolder(dir);
   }
+  return;
 }
