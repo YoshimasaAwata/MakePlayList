@@ -24,4 +24,10 @@ void PLSFiles::FileNameSpecified(bool new_file_name_specified) {
   file_name_specified_ = new_file_name_specified;
 }
 
+bool PLSFiles::AddFolder(const QString& new_folder) { return true; }
+
+void PLSFiles::ChangeFolderName(const QString& new_folder) {}
+
+void PLSFiles::ChangeFileName(const QString& new_file) {}
+
 PLSFiles::PLSFiles() {}
