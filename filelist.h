@@ -32,7 +32,7 @@ class FileList : public QListWidget {
    * @brief 指定のディレクトリ中のファイルをリストに追加
    * @param dir ディレクトリ
    */
-  virtual void AddFilesInDir(QString& dir);
+  virtual void AddFilesInDir(QDir& dir);
 
   static const QStringList kVideoFilter;  ///< ビデオファイルのフィルタ
 };

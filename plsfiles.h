@@ -1,53 +1,51 @@
 ﻿#ifndef PLSFILES_H
 #define PLSFILES_H
 
+#include <QLineEdit>
 #include <QObject>
 
 /**
  * @brief PLSファイルの内容の管理と出力
  */
 class PLSFiles {
-  QString folder_name_ = "";            ///< PLSファイルを格納するフォルダ
-  bool folder_name_specified_ = false;  ///< PLSファイルを格納するフォルダの指定
-  QString file_name_ = "";              ///< PLSファイル名(拡張子なし)
-  bool file_name_specified_ = false;    ///< PLSファイル名を指定
+  QLineEdit* pfolder_;             ///< PLSファイルを格納するフォルダ
+  bool folder_specified_ = false;  ///< PLSファイルを格納するフォルダの指定
+  QLineEdit* pfile_;               ///< PLSファイル名(拡張子なし)
+  bool file_specified_ = false;    ///< PLSファイル名を指定
 
  public:
-  PLSFiles();
+  PLSFiles() {}
 
   // Getter / Setter
-  QString FolderName() const;
-  void FolderName(const QString& new_folder_name);
-  QString FileName() const;
-  void FileName(const QString& new_file_name);
-  bool FolderNameSpecified() const;
-  void FolderNameSpecified(bool new_folder_name_specified);
-  bool FileNameSpecified() const;
-  void FileNameSpecified(bool new_file_name_specified);
-
-  /**
-   * @brief 指定したフォルダ内のファイルを追加
-   * @details
-   * フォルダが直接指定されていなければ、PLSファイルの格納フォルダをアップデート
-   * また、ファイル名が直接指定されていなければ、PLSファイル名をフォルダ名にアップデート
-   * フォルダ内のファイルは特定の動画ファイルのみを対象とする
-   * @param new_folder フォルダ名
-   * @return フォルダ名のアップデートがおこなわれた(true)
-   */
-  bool AddFolder(const QString& new_folder);
+  QLineEdit* Folder() const { return pfolder_; };
+  void Folder(QLineEdit* pfolder) { pfolder_ = pfolder; };
+  QLineEdit* File() const { return pfile_; };
+  void File(QLineEdit* pfile) { pfile_ = pfile; };
+  bool FolderSpecified() const { return folder_specified_; };
+  void FolderSpecified(bool folder_specified) {
+    folder_specified_ = folder_specified;
+  };
+  bool FileSpecified() const { return file_specified_; };
+  void FileSpecified(bool file_specified) { file_specified_ = file_specified; };
 
   /**
    * @brief PLSファイルを格納するフォルダを直接変更
-   * @param new_folder フォルダ名
+   * @details UIのfolderLineEditの内容を変更
+   * @param folder フォルダ名
+   * @param force フォルダの変更を強制
    */
-  void ChangeFolderName(const QString& new_folder);
+  void ChangeFolder(const QString& folder, bool force = false);
 
   /**
    * @brief PLSファイル名を直接変更
-   * @details ファイル名には拡張子を付けない
-   * @param new_file ファイル名
+   * @details ファイル名には拡張子を付けない<br>
+   *          UIのfileNameLineEditの内容を変更
+   * @param file ファイル名
+   * @param force ファイルの変更を強制
    */
-  void ChangeFileName(const QString& new_file);
+  void ChangeFile(const QString& file, bool force = false);
+
+  static const QString ext_;  ///< PLSファイルの拡張子
 };
 
 #endif  // PLSFILES_H

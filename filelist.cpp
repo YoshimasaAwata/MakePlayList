@@ -35,10 +35,9 @@ void FileList::AddFile(QFileInfo& file_info) {
   return;
 }
 
-void FileList::AddFilesInDir(QString& dir) {
-  QDir dir_info(dir);
+void FileList::AddFilesInDir(QDir& dir) {
   auto file_list =
-      dir_info.entryInfoList(kVideoFilter, QDir::Files | QDir::NoDotAndDotDot);
+      dir.entryInfoList(kVideoFilter, QDir::Files | QDir::NoDotAndDotDot);
   foreach (auto file, file_list) {
     AddFile(file);
   }
