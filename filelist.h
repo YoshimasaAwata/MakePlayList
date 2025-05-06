@@ -1,6 +1,7 @@
 ﻿#ifndef FILELIST_H
 #define FILELIST_H
 
+#include <QFileInfo>
 #include <QListWidget>
 
 /**
@@ -8,23 +9,32 @@
  * @details リストの表示もおこなう
  */
 class FileList : public QListWidget {
-  QStringList video_ext_ = {"mp4", "ts2",  "avi", "mov", "wmv",
-                            "flv", "webm", "mpg", "mkv"};
+ protected:
+  /**
+   * @brief ファイルがリストに含まれているか
+   * @param file_info チェックするファイルの情報
+   * @return ファイルがリストに含まれているか
+   * @retval true ファイルがリストに含まれている
+   * @retval false ファイルがリストに含まれていない
+   */
+  virtual bool ContainsFile(QFileInfo& file_info);
 
  public:
-  FileList() : QListWidget() {};
+  FileList(QWidget* parent = nullptr) : QListWidget(parent) {};
 
   /**
    * @brief ファイルをリストに追加
-   * @param file_name 追加するファイル名
+   * @param file_info 追加するファイルの情報
    */
-  virtual void AddFile(QString& file_name);
+  virtual void AddFile(QFileInfo& file_info);
 
   /**
    * @brief 指定のディレクトリ中のファイルをリストに追加
    * @param dir ディレクトリ
    */
   virtual void AddFilesInDir(QString& dir);
+
+  static const QStringList kVideoFilter;  ///< ビデオファイルのフィルタ
 };
 
 #endif  // FILELIST_H

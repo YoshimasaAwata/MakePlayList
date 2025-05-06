@@ -25,6 +25,10 @@ target_link_libraries(MakePlayList
 
 include(GNUInstallDirs)
 
+target_include_directories(MakePlayList
+    PRIVATE ${CMAKE_SOURCE_DIR}
+)
+
 install(TARGETS MakePlayList
     BUNDLE  DESTINATION .
     RUNTIME DESTINATION ${CMAKE_INSTALL_BINDIR}
