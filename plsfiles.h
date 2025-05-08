@@ -2,6 +2,7 @@
 #define PLSFILES_H
 
 #include <QLineEdit>
+#include <QListWidget>
 #include <QObject>
 
 /**
@@ -34,7 +35,7 @@ class PLSFiles {
    * @param folder フォルダ名
    * @param force フォルダの変更を強制
    */
-  void ChangeFolder(const QString& folder, bool force = false);
+  virtual void ChangeFolder(const QString& folder, bool force = false);
 
   /**
    * @brief PLSファイル名を直接変更
@@ -43,9 +44,47 @@ class PLSFiles {
    * @param file ファイル名
    * @param force ファイルの変更を強制
    */
-  void ChangeFile(const QString& file, bool force = false);
+  virtual void ChangeFile(const QString& file, bool force = false);
 
-  static const QString ext_;  ///< PLSファイルの拡張子
+  /**
+   * @brief PLSファイル出力
+   * @param plist ファイルリスト
+   * @return ファイル出力の成否
+   * @retval true 出力成功
+   * @retval false 出力失敗
+   */
+  virtual bool OutPLSFile(QListWidget* plist) const;
+
+  /**
+   * @brief PLSファイルが存在するかどうかのチェック
+   * @return PLSファイルが存在するかどうか
+   * @retval trua 存在する
+   * @retval false 存在しない
+   */
+  virtual bool CheckFileExist() const;
+
+ protected:
+  /**
+   * @brief 実際のプレイリストをファイルに出力
+   * @param stream ファイルに出力するためのストリーム
+   * @param plist ファイルリスト
+   * @return 出力されたリストの数
+   */
+  virtual int OutPlayList(QTextStream& stream, QListWidget* plist) const;
+
+  /**
+   * @brief PLSファイル名の絶対パスを取得
+   * @return PLSファイル名の絶対パス
+   */
+  virtual QString GetAbsoludePath() const;
+
+  static const QString kExt;      ///< PLSファイルの拡張子
+  static const QString kHeader;   ///< PLSファイルのヘッダー
+  static const QString kNumber;   ///< PLSファイルのリスト数
+  static const QString kVersion;  ///< PLSファイルのバージョン
+  static const QString kFile;     ///< PLSファイルのファイル指定
+  static const QString kTitle;    ///< PLSファイルのタイトル指定
+  static const QString kLength;   ///< PLSファイルの長さ指定
 };
 
 #endif  // PLSFILES_H

@@ -1,6 +1,15 @@
 ﻿#include "plsfiles.h"
 
-const QString PLSFiles::ext_(".pls");
+#include <QDir>
+#include <QFile>
+
+const QString PLSFiles::kExt(".pls");
+const QString PLSFiles::kHeader("[playlist]");
+const QString PLSFiles::kNumber("NumberOfEntries=");
+const QString PLSFiles::kVersion("Version=2");
+const QString PLSFiles::kFile("File");
+const QString PLSFiles::kTitle("Title");
+const QString PLSFiles::kLength("Length");
 
 void PLSFiles::ChangeFolder(const QString& folder, bool force) {
   if (force || !FolderSpecified()) {
@@ -16,4 +25,46 @@ void PLSFiles::ChangeFile(const QString& file, bool force) {
     FileSpecified(force || FileSpecified());
   }
   return;
+}
+
+bool PLSFiles::OutPLSFile(QListWidget* plist) const {
+  auto pls_file_name = GetAbsoludePath();
+  QFile pls_file(pls_file_name);
+  auto rc = pls_file.open(QIODeviceBase::WriteOnly | QIODeviceBase::Text);
+  if (rc) {
+    QTextStream stream(&pls_file);
+    stream << kHeader << "\n";
+    auto num = OutPlayList(stream, plist);
+    stream << kNumber << num << "\n";
+    stream << kVersion << "\n";
+    pls_file.close();
+  }
+  return rc;
+}
+
+QString PLSFiles::GetAbsoludePath() const {
+  auto pls_file_name = Folder()->text() + "/" + File()->text() + kExt;
+  return pls_file_name;
+}
+
+bool PLSFiles::CheckFileExist() const {
+  auto pls_file_name = GetAbsoludePath();
+  QFile file(pls_file_name);
+  auto rc = file.exists();
+  return rc;
+}
+
+int PLSFiles::OutPlayList(QTextStream& stream, QListWidget* plist) const {
+  QDir curr_dir(Folder()->text());
+  for (int i = 0; i < plist->count(); ++i) {
+    auto pitem = plist->item(i);
+    auto title = pitem->text();
+    auto path = pitem->toolTip();
+    auto relative = curr_dir.relativeFilePath(path);
+    int idx = i + 1;
+    stream << kFile << idx << "=" << relative << "\n";
+    stream << kTitle << idx << "=" << title << "\n";
+    stream << kLength << idx << "=-1\n";
+  }
+  return plist->count();
 }

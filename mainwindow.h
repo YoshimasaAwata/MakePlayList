@@ -19,6 +19,8 @@ class MainWindow : public QMainWindow {
   MainWindow(QWidget *parent = nullptr);
   ~MainWindow();
 
+  PLSFiles &GetPLSFiles() { return plsfiles_; };
+
  private slots:
   /**
    * @brief クローズボタンのクリックでアプリケーションの終了
