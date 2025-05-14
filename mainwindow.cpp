@@ -8,6 +8,7 @@
 MainWindow::MainWindow(QWidget* parent)
     : QMainWindow(parent), ui(new Ui::MainWindow) {
   ui->setupUi(this);
+  setWindowIcon(QIcon(":/MakePlayList.ico"));
   GetPLSFiles().Folder(ui->folderLineEdit);
   GetPLSFiles().File(ui->fileNameLineEdit);
 }
