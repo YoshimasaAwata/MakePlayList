@@ -1,11 +1,11 @@
 ﻿#include <windows.h>
 
-#define APP_VERSION 0,0,1,0
-#define APP_VERSION_STR "0.0.1.0"
+#define MY_VERSION "@PROJECT_VERSION@"
+#define MY_VERSION_STR @PROJECT_VERSION_STR@
 
 VS_VERSION_INFO VERSIONINFO
- FILEVERSION APP_VERSION
- PRODUCTVERSION APP_VERSION
+ FILEVERSION MY_VERSION_STR
+ PRODUCTVERSION MY_VERSION_STR
  FILEOS VOS_NT_WINDOWS32
  FILETYPE VFT_APP
  FILESUBTYPE VFT2_UNKNOWN
@@ -16,12 +16,12 @@ BEGIN
         BEGIN
             VALUE "CompanyName", "Yoshia"
             VALUE "FileDescription", "Make play list"
-            VALUE "FileVersion", APP_VERSION_STR
+            VALUE "FileVersion", MY_VERSION
             VALUE "InternalName", "MakePlayList"
             VALUE "LegalCopyright", "Copyright (C) 2025 Yoshimasa Awata"
             VALUE "OriginalFilename", "MyPlayList.exe"
             VALUE "ProductName", "MakePlayList"
-            VALUE "ProductVersion", APP_VERSION_STR
+            VALUE "ProductVersion", MY_VERSION
         END
     END
     BLOCK "VarFileInfo"

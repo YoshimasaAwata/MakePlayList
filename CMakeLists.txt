@@ -3,6 +3,9 @@ project(MakePlayList VERSION 0.0.1 LANGUAGES CXX)
 
 find_package(Qt6 6.5 REQUIRED COMPONENTS Core Widgets)
 
+string(REPLACE "." "," PROJECT_VERSION_STR "${PROJECT_VERSION}" ",0")
+configure_file(${CMAKE_SOURCE_DIR}/MakePlayList.rc.in ${CMAKE_SOURCE_DIR}/MakePlayList.rc @ONLY)
+
 qt_standard_project_setup()
 
 qt_add_executable(MakePlayList
