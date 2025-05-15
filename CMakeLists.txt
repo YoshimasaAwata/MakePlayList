@@ -1,5 +1,5 @@
 ﻿cmake_minimum_required(VERSION 3.19)
-project(MakePlayList LANGUAGES CXX)
+project(MakePlayList VERSION 0.0.1 LANGUAGES CXX)
 
 find_package(Qt6 6.5 REQUIRED COMPONENTS Core Widgets)
 
@@ -16,7 +16,7 @@ qt_add_executable(MakePlayList
     filelist.cpp
     filelist.h
     MakePlayList.qrc
-    icon.rc
+    MakePlayList.rc
 )
 
 target_link_libraries(MakePlayList
@@ -43,3 +43,5 @@ qt_generate_deploy_app_script(
     NO_UNSUPPORTED_PLATFORM_ERROR
 )
 install(SCRIPT ${deploy_script})
+
+add_compile_definitions(APP_VERSION="${PROJECT_VERSION}")
