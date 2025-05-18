@@ -21,6 +21,18 @@ class MainWindow : public QMainWindow {
 
   PLSFiles &GetPLSFiles() { return plsfiles_; };
 
+ protected:
+  /**
+   * @brief Up, Down, Removeボタンの有効化 / 無効化
+   * @param enable 有効化(true), 無効化(false)
+   */
+  void EnableButtons(bool enable = true);
+
+  /**
+   * @brief リストボックス中のアイテム数に応じてクリアボタンを有効化 / 無効化
+   */
+  void EnableClearButton();
+
  private slots:
   /**
    * @brief クローズボタンのクリックでアプリケーションの終了
@@ -47,6 +59,25 @@ class MainWindow : public QMainWindow {
    * @brief PLSファイル生成ボタンクリック
    */
   void on_createPushButton_clicked();
+
+  /**
+   * @brief ファイルリストで選択が変化した場合
+   * @details 選択されていればUp, Down, Removeボタンを有効化
+   * @details 選択されていなければUp, Down, Removeボタンを無効化
+   */
+  void on_fileListWidget_itemSelectionChanged();
+
+  /**
+   * @brief クリアボタンクリックで全リストアイテム削除
+   * @details クリアするかどうかのダイアログ表示
+   */
+  void on_clearButton_clicked();
+
+  /**
+   * @brief リムーブボタンクリックで選択したアイテム削除
+   * @details 削除するかどうかのダイアログ表示
+   */
+  void on_removeButton_clicked();
 
  private:
   Ui::MainWindow *ui;
