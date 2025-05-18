@@ -24,14 +24,13 @@ class MainWindow : public QMainWindow {
  protected:
   /**
    * @brief Up, Down, Removeボタンの有効化 / 無効化
-   * @param enable 有効化(true), 無効化(false)
    */
-  void EnableButtons(bool enable = true);
+  void EnableButtons();
 
   /**
    * @brief リストボックス中のアイテム数に応じてクリアボタンを有効化 / 無効化
    */
-  void EnableClearButton();
+  void EnableCreateClearButton();
 
  private slots:
   /**
@@ -78,6 +77,16 @@ class MainWindow : public QMainWindow {
    * @details 削除するかどうかのダイアログ表示
    */
   void on_removeButton_clicked();
+
+  /**
+   * @brief アップボタンクリックで選択アイテムを1つアップ
+   */
+  void on_upButton_clicked();
+
+  /**
+   * @brief ダウンボタンクリックで選択アイテムを1つダウン
+   */
+  void on_downButton_clicked();
 
  private:
   Ui::MainWindow *ui;
