@@ -18,6 +18,8 @@ qt_add_executable(MakePlayList
     plsfiles.h
     filelist.cpp
     filelist.h
+    filediredit.cpp
+    filediredit.h
     MakePlayList.qrc
     MakePlayList.rc
 )

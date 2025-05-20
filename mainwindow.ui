@@ -116,7 +116,7 @@
        </widget>
       </item>
       <item>
-       <widget class="QLineEdit" name="folderLineEdit">
+       <widget class="FileDirEdit" name="folderLineEdit">
         <property name="readOnly">
          <bool>true</bool>
         </property>
@@ -137,7 +137,7 @@
        </widget>
       </item>
       <item>
-       <widget class="QLineEdit" name="fileNameLineEdit"/>
+       <widget class="FileDirEdit" name="fileNameLineEdit"/>
       </item>
       <item>
        <spacer name="horizontalSpacer">
@@ -170,8 +170,323 @@
    <class>FileList</class>
    <extends>QListWidget</extends>
    <header>filelist.h</header>
+   <slots>
+    <signal>Message2StatusBar(QString)</signal>
+    <signal>ButtonEnabled(bool)</signal>
+    <signal>RemoveEnabled(bool)</signal>
+    <signal>UpEnabled(bool)</signal>
+    <signal>DownEnabled(bool)</signal>
+    <slot>UpSelected()</slot>
+    <slot>DownSelected()</slot>
+    <slot>RemoveSelected()</slot>
+    <slot>AddFiles()</slot>
+   </slots>
+  </customwidget>
+  <customwidget>
+   <class>FileDirEdit</class>
+   <extends>QLineEdit</extends>
+   <header location="global">filediredit.h</header>
+   <slots>
+    <signal>SetFile(QString)</signal>
+    <signal>Message2StatusBar(QString)</signal>
+    <slot>SetFolder()</slot>
+    <slot>ForceSetText(QString)</slot>
+    <slot>TextSpecified()</slot>
+   </slots>
   </customwidget>
  </customwidgets>
  <resources/>
- <connections/>
+ <connections>
+  <connection>
+   <sender>clearButton</sender>
+   <signal>clicked()</signal>
+   <receiver>fileListWidget</receiver>
+   <slot>clear()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>742</x>
+     <y>145</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>522</x>
+     <y>156</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>fileListWidget</sender>
+   <signal>Message2StatusBar(QString)</signal>
+   <receiver>statusbar</receiver>
+   <slot>showMessage(QString)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>202</x>
+     <y>449</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>212</x>
+     <y>587</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>fileListWidget</sender>
+   <signal>ButtonEnabled(bool)</signal>
+   <receiver>createPushButton</receiver>
+   <slot>setEnabled(bool)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>650</x>
+     <y>503</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>745</x>
+     <y>522</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>fileListWidget</sender>
+   <signal>ButtonEnabled(bool)</signal>
+   <receiver>clearButton</receiver>
+   <slot>setEnabled(bool)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>679</x>
+     <y>131</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>719</x>
+     <y>145</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>fileListWidget</sender>
+   <signal>UpEnabled(bool)</signal>
+   <receiver>upButton</receiver>
+   <slot>setEnabled(bool)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>631</x>
+     <y>59</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>742</x>
+     <y>57</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>fileListWidget</sender>
+   <signal>DownEnabled(bool)</signal>
+   <receiver>downButton</receiver>
+   <slot>setEnabled(bool)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>670</x>
+     <y>73</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>727</x>
+     <y>81</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>fileListWidget</sender>
+   <signal>RemoveEnabled(bool)</signal>
+   <receiver>removeButton</receiver>
+   <slot>setEnabled(bool)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>668</x>
+     <y>111</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>715</x>
+     <y>116</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>upButton</sender>
+   <signal>clicked()</signal>
+   <receiver>fileListWidget</receiver>
+   <slot>UpSelected()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>734</x>
+     <y>45</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>655</x>
+     <y>41</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>downButton</sender>
+   <signal>clicked()</signal>
+   <receiver>fileListWidget</receiver>
+   <slot>DownSelected()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>723</x>
+     <y>89</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>414</x>
+     <y>94</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>removeButton</sender>
+   <signal>clicked()</signal>
+   <receiver>fileListWidget</receiver>
+   <slot>RemoveSelected()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>721</x>
+     <y>106</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>453</x>
+     <y>96</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>closeButton</sender>
+   <signal>clicked()</signal>
+   <receiver>MainWindow</receiver>
+   <slot>close()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>765</x>
+     <y>559</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>673</x>
+     <y>557</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>folderButton</sender>
+   <signal>clicked()</signal>
+   <receiver>folderLineEdit</receiver>
+   <slot>SetFolder()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>258</x>
+     <y>558</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>157</x>
+     <y>559</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>folderLineEdit</sender>
+   <signal>SetFile(QString)</signal>
+   <receiver>fileNameLineEdit</receiver>
+   <slot>setText(QString)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>144</x>
+     <y>552</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>444</x>
+     <y>559</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>folderLineEdit</sender>
+   <signal>Message2StatusBar(QString)</signal>
+   <receiver>statusbar</receiver>
+   <slot>showMessage(QString)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>106</x>
+     <y>560</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>106</x>
+     <y>595</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>addButton</sender>
+   <signal>clicked()</signal>
+   <receiver>fileListWidget</receiver>
+   <slot>AddFiles()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>750</x>
+     <y>15</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>594</x>
+     <y>18</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>fileNameLineEdit</sender>
+   <signal>editingFinished()</signal>
+   <receiver>fileNameLineEdit</receiver>
+   <slot>TextSpecified()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>492</x>
+     <y>561</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>517</x>
+     <y>562</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>createPushButton</sender>
+   <signal>clicked()</signal>
+   <receiver>MainWindow</receiver>
+   <slot>CreatePLSFile()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>770</x>
+     <y>517</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>763</x>
+     <y>458</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>fileNameLineEdit</sender>
+   <signal>Message2StatusBar(QString)</signal>
+   <receiver>statusbar</receiver>
+   <slot>showMessage(QString)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>469</x>
+     <y>559</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>470</x>
+     <y>590</y>
+    </hint>
+   </hints>
+  </connection>
+ </connections>
+ <slots>
+  <slot>CreatePLSFile()</slot>
+ </slots>
 </ui>

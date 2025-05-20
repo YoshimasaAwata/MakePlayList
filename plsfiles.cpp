@@ -11,23 +11,23 @@ const QString PLSFiles::kFile("File");
 const QString PLSFiles::kTitle("Title");
 const QString PLSFiles::kLength("Length");
 
-void PLSFiles::ChangeFolder(const QString& folder, bool force) {
-  if (force || !FolderSpecified()) {
-    Folder()->setText(folder);
-    FolderSpecified(force || FolderSpecified());
-  }
-  return;
-}
+// void PLSFiles::ChangeFolder(const QString& folder, bool force) {
+//   if (force || !FolderSpecified()) {
+//     Folder()->setText(folder);
+//     FolderSpecified(force || FolderSpecified());
+//   }
+//   return;
+// }
 
-void PLSFiles::ChangeFile(const QString& file, bool force) {
-  if (force || !FileSpecified()) {
-    File()->setText(file);
-    FileSpecified(force || FileSpecified());
-  }
-  return;
-}
+// void PLSFiles::ChangeFile(const QString& file, bool force) {
+//   if (force || !FileSpecified()) {
+//     File()->setText(file);
+//     FileSpecified(force || FileSpecified());
+//   }
+//   return;
+// }
 
-bool PLSFiles::OutPLSFile(QListWidget* plist) const {
+bool PLSFiles::OutPLSFile(const QListWidget* plist) const {
   auto pls_file_name = GetAbsoludePath();
   QFile pls_file(pls_file_name);
   auto rc = pls_file.open(QIODeviceBase::WriteOnly | QIODeviceBase::Text);
@@ -43,7 +43,7 @@ bool PLSFiles::OutPLSFile(QListWidget* plist) const {
 }
 
 QString PLSFiles::GetAbsoludePath() const {
-  auto pls_file_name = Folder()->text() + "/" + File()->text() + kExt;
+  auto pls_file_name = Folder() + "/" + File() + kExt;
   return pls_file_name;
 }
 
@@ -54,8 +54,8 @@ bool PLSFiles::CheckFileExist() const {
   return rc;
 }
 
-int PLSFiles::OutPlayList(QTextStream& stream, QListWidget* plist) const {
-  QDir curr_dir(Folder()->text());
+int PLSFiles::OutPlayList(QTextStream& stream, const QListWidget* plist) const {
+  QDir curr_dir(Folder());
   for (int i = 0; i < plist->count(); ++i) {
     auto pitem = plist->item(i);
     auto title = pitem->text();

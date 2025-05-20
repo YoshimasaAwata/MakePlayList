@@ -9,25 +9,24 @@
  * @brief PLSファイルの内容の管理と出力
  */
 class PLSFiles {
-  QLineEdit* pfolder_;             ///< PLSファイルを格納するフォルダ
-  bool folder_specified_ = false;  ///< PLSファイルを格納するフォルダの指定
-  QLineEdit* pfile_;               ///< PLSファイル名(拡張子なし)
-  bool file_specified_ = false;    ///< PLSファイル名を指定
+ private:
+  QString folder_;  ///< PLSファイルを格納するフォルダ
+  QString file_;    ///< PLSファイル名(拡張子なし)
 
  public:
-  PLSFiles() {}
+  /**
+   * @brief コンストラクタ
+   * @param[in] folder PLSファイルの出力先フォルダ
+   * @param[in] file PLSファイル名(拡張子なし)
+   */
+  PLSFiles(const QString& folder, const QString& file)
+      : folder_(folder), file_(file) {}
 
   // Getter / Setter
-  QLineEdit* Folder() const { return pfolder_; };
-  void Folder(QLineEdit* pfolder) { pfolder_ = pfolder; };
-  QLineEdit* File() const { return pfile_; };
-  void File(QLineEdit* pfile) { pfile_ = pfile; };
-  bool FolderSpecified() const { return folder_specified_; };
-  void FolderSpecified(bool folder_specified) {
-    folder_specified_ = folder_specified;
-  };
-  bool FileSpecified() const { return file_specified_; };
-  void FileSpecified(bool file_specified) { file_specified_ = file_specified; };
+  const QString& Folder() const { return folder_; };
+  void setFolder(const QString& folder) { folder_ = folder; };
+  const QString& File() const { return file_; };
+  void setFile(const QString& file) { file_ = file; };
 
   /**
    * @brief PLSファイルを格納するフォルダを直接変更
@@ -35,7 +34,7 @@ class PLSFiles {
    * @param folder フォルダ名
    * @param force フォルダの変更を強制
    */
-  virtual void ChangeFolder(const QString& folder, bool force = false);
+  // virtual void ChangeFolder(const QString& folder, bool force = false);
 
   /**
    * @brief PLSファイル名を直接変更
@@ -44,7 +43,7 @@ class PLSFiles {
    * @param file ファイル名
    * @param force ファイルの変更を強制
    */
-  virtual void ChangeFile(const QString& file, bool force = false);
+  // virtual void ChangeFile(const QString& file, bool force = false);
 
   /**
    * @brief PLSファイル出力
@@ -53,7 +52,7 @@ class PLSFiles {
    * @retval true 出力成功
    * @retval false 出力失敗
    */
-  virtual bool OutPLSFile(QListWidget* plist) const;
+  virtual bool OutPLSFile(const QListWidget* plist) const;
 
   /**
    * @brief PLSファイルが存在するかどうかのチェック
@@ -70,7 +69,7 @@ class PLSFiles {
    * @param plist ファイルリスト
    * @return 出力されたリストの数
    */
-  virtual int OutPlayList(QTextStream& stream, QListWidget* plist) const;
+  virtual int OutPlayList(QTextStream& stream, const QListWidget* plist) const;
 
   /**
    * @brief PLSファイル名の絶対パスを取得
