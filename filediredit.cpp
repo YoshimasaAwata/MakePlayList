@@ -12,11 +12,13 @@ void FileDirEdit::setText(const QString& name) {
 void FileDirEdit::ForceSetText(const QString& name) {
   QLineEdit::setText(name);
   setSpecified(true);
+  setStyleSheet("background-color: #FFEEFF;");
   return;
 }
 
 void FileDirEdit::TextSpecified() {
   setSpecified(true);
+  setStyleSheet("background-color: #FFEEFF;");
   emit Message2StatusBar(tr("出力先ファイル名を指定しました"));
   return;
 }

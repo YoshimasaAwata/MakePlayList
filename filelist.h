@@ -81,6 +81,11 @@ class FileList : public QListWidget {
    */
   void DownSelected() { UpDownSelected(false); };
 
+  /**
+   * @brief アイテム選択に変更があったときにボタンの有効/無効を切り替える
+   */
+  void ItemsSelectChanged() { EnableButtons(); }
+
  signals:
   /**
    * @brief ステータスバーにメッセージを表示するためのシグナル
