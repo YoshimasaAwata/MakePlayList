@@ -11,22 +11,6 @@ const QString PLSFiles::kFile("File");
 const QString PLSFiles::kTitle("Title");
 const QString PLSFiles::kLength("Length");
 
-// void PLSFiles::ChangeFolder(const QString& folder, bool force) {
-//   if (force || !FolderSpecified()) {
-//     Folder()->setText(folder);
-//     FolderSpecified(force || FolderSpecified());
-//   }
-//   return;
-// }
-
-// void PLSFiles::ChangeFile(const QString& file, bool force) {
-//   if (force || !FileSpecified()) {
-//     File()->setText(file);
-//     FileSpecified(force || FileSpecified());
-//   }
-//   return;
-// }
-
 bool PLSFiles::OutPLSFile(const QListWidget* plist) const {
   auto pls_file_name = GetAbsoludePath();
   QFile pls_file(pls_file_name);

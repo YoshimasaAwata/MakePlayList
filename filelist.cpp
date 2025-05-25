@@ -127,29 +127,3 @@ void FileList::RemoveSelected() {
   EnableButtons();
   return;
 }
-
-// void FileList::UpSelected() {
-//   auto list = selectedItems();
-//   auto first_item = list.at(0);
-//   auto last_item = list.at(list.size() - 1);
-//   auto first_idx = row(first_item);
-//   auto last_idx = row(last_item);
-//   auto move_item = takeItem(first_idx - 1);
-//   insertItem(last_idx, move_item);
-//   emit Message2StatusBar(tr("選択したファイルを移動しました"));
-//   EnableButtons();
-//   return;
-// }
-
-// void FileList::DownSelected() {
-//   auto list = selectedItems();
-//   auto first_item = list.at(0);
-//   auto last_item = list.at(list.size() - 1);
-//   auto first_idx = row(first_item);
-//   auto last_idx = row(last_item);
-//   auto move_item = takeItem(last_idx + 1);
-//   insertItem(first_idx, move_item);
-//   emit Message2StatusBar(tr("選択したファイルを移動しました"));
-//   EnableButtons();
-//   return;
-// }

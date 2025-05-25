@@ -48,8 +48,5 @@ qt_generate_deploy_app_script(
     NO_UNSUPPORTED_PLATFORM_ERROR
 )
 install(SCRIPT ${deploy_script})
-#install(FILES ${CMAKE_SOURCE_DIR}/MakePlayList.qss DESTINATION $<TARGET_FILE_DIR:MakePlayList>)
-add_custom_command(TARGET MakePlayList POST_BUILD COMMAND ${CMAKE_COMMAND} -E rm $<TARGET_FILE_DIR:MakePlayList>/MakePlayList.qss)
-add_custom_command(TARGET MakePlayList POST_BUILD COMMAND ${CMAKE_COMMAND} -E copy ${CMAKE_SOURCE_DIR}/MakePlayList.qss $<TARGET_FILE_DIR:MakePlayList>)
 
 add_compile_definitions(APP_VERSION="${PROJECT_VERSION}")
