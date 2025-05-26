@@ -1,6 +1,9 @@
 ﻿#ifndef FILELIST_H
 #define FILELIST_H
 
+#include <QDragEnterEvent>
+#include <QDragLeaveEvent>
+#include <QDragMoveEvent>
 #include <QFileInfo>
 #include <QListWidget>
 
@@ -37,8 +40,36 @@ class FileList : public QListWidget {
    */
   virtual void UpDownSelected(bool updown);
 
+  /**
+   * @brief ドラッグしながら領域に入った時の動作
+   * @details ドロップを許可して背景色を変化させる
+   * @param pevent
+   */
+  virtual void dragEnterEvent(QDragEnterEvent* pevent) override;
+
+  /**
+   * @brief ドラッグしながら領域を移動する時の動作
+   * @details ドロップを許可
+   * @param pevent
+   */
+  virtual void dragMoveEvent(QDragMoveEvent* pevent) override;
+
+  /**
+   * @brief ドラッグしながら領域から出た時の動作
+   * @details 背景色を戻す
+   * @param pevent
+   */
+  virtual void dragLeaveEvent(QDragLeaveEvent* pevent) override;
+
+  /**
+   * @brief ドロップ時の動作
+   * @details ドロップアイテムが動画のファイルやフォルダならリストに追加
+   * @param pevent
+   */
+  virtual void dropEvent(QDropEvent* pevent) override;
+
  public:
-  FileList(QWidget* parent = nullptr) : QListWidget(parent) {};
+  FileList(QWidget* parent = nullptr);
 
   /**
    * @brief ファイルをリストに追加

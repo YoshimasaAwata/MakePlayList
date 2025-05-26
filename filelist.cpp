@@ -1,10 +1,10 @@
 ﻿#include "filelist.h"
 
-#include <qdir.h>
-
+#include <QDir>
 #include <QFileDialog>
 #include <QFileInfo>
 #include <QMessageBox>
+#include <QMimeData>
 
 const QStringList FileList::kVideoFilter = {"*.mp4",  "*.ts2", "*.avi",
                                             "*.mov",  "*.wmv", "*.flv",
@@ -67,6 +67,52 @@ void FileList::UpDownSelected(bool updown) {
   return;
 }
 
+void FileList::dragEnterEvent(QDragEnterEvent* pevent) {
+  if (pevent->mimeData()->hasUrls()) {
+    qDebug() << "Enter url";
+    pevent->acceptProposedAction();
+    setStyleSheet("background-color: #70ffff;");
+  }
+  return;
+}
+
+void FileList::dragMoveEvent(QDragMoveEvent* pevent) {
+  if (pevent->mimeData()->hasUrls()) {
+    pevent->acceptProposedAction();
+  }
+  return;
+}
+
+void FileList::dropEvent(QDropEvent* pevent) {
+  foreach (auto url, pevent->mimeData()->urls()) {
+    if (url.isLocalFile()) {
+      QFileInfo info(url.toLocalFile());
+      if (info.isDir()) {
+        QDir dir(info.filePath());
+        AddFilesInDir(dir);
+      } else if (info.isFile()) {
+        AddFile(info);
+        emit SetFolder(info.dir().path());
+        emit SetFile(info.dir().dirName());
+        emit Message2StatusBar(tr("ファイルの追加に成功しました"));
+        EnableCreateClearButton();
+      }
+    }
+  }
+  return;
+}
+
+void FileList::dragLeaveEvent(QDragLeaveEvent* pevent) {
+  setStyleSheet("background-color: lightcyan;");
+  return;
+}
+
+FileList::FileList(QWidget* parent) : QListWidget(parent) {
+  setDragEnabled(false);
+  setAcceptDrops(true);
+  setDropIndicatorShown(true);
+}
+
 void FileList::AddFile(QFileInfo& file_info) {
   auto exist = ContainsFile(file_info);
   if (!exist) {
@@ -84,7 +130,12 @@ void FileList::AddFilesInDir(QDir& dir) {
       dir.entryInfoList(kVideoFilter, QDir::Files | QDir::NoDotAndDotDot);
   foreach (auto file, file_list) {
     AddFile(file);
+    emit SetFolder(dir.path());
+    emit SetFile(dir.dirName());
+    emit Message2StatusBar(tr("ファイルの追加に成功しました"));
+    EnableCreateClearButton();
   }
+  return;
 }
 
 void FileList::AddFiles() {
@@ -92,11 +143,7 @@ void FileList::AddFiles() {
   if (!dir_name.isEmpty()) {
     QDir dir(dir_name);
     AddFilesInDir(dir);
-    emit SetFolder(dir.path());
-    emit SetFile(dir.dirName());
-    emit Message2StatusBar(tr("ファイルの追加に成功しました"));
   }
-  EnableCreateClearButton();
   return;
 }
 
