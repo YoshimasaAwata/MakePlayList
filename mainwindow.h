@@ -22,6 +22,11 @@ class MainWindow : public QMainWindow {
    */
   void CreatePLSFile();
 
+  /**
+   * @brief Aboutダイアログの表示
+   */
+  void ShowAboutDialog();
+
  private:
   Ui::MainWindow *ui;
 };

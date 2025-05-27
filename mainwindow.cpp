@@ -3,13 +3,14 @@
 #include <QFileDialog>
 #include <QMessageBox>
 
+#include "about_dialog.h"
 #include "plsfiles.h"
 #include "ui_mainwindow.h"
 
 MainWindow::MainWindow(QWidget* parent)
     : QMainWindow(parent), ui(new Ui::MainWindow) {
   ui->setupUi(this);
-  setWindowIcon(QIcon(":/MakePlayList.ico"));
+  setWindowIcon(QIcon("MakePlayList.ico"));
   connect(ui->fileListWidget, SIGNAL(SetFile(QString)), ui->fileNameLineEdit,
           SLOT(setText(QString)));
   connect(ui->fileListWidget, SIGNAL(SetFolder(QString)), ui->folderLineEdit,
@@ -41,5 +42,11 @@ void MainWindow::CreatePLSFile() {
       ui->statusbar->showMessage(msg);
     }
   }
+  return;
+}
+
+void MainWindow::ShowAboutDialog() {
+  AboutDialog dialog;
+  dialog.exec();
   return;
 }

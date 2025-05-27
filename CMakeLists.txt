@@ -20,8 +20,10 @@ qt_add_executable(MakePlayList
     filelist.h
     filediredit.cpp
     filediredit.h
-    MakePlayList.qrc
     MakePlayList.rc
+    about_dialog.cpp
+    about_dialog.h
+    about_dialog.ui
 )
 
 target_link_libraries(MakePlayList
@@ -50,3 +52,8 @@ qt_generate_deploy_app_script(
 install(SCRIPT ${deploy_script})
 
 add_compile_definitions(APP_VERSION="${PROJECT_VERSION}")
+
+if (EXISTS $<TARGET_FILE_DIR:MakePlayList>/MakePlayList.ico)
+  add_custom_command(TARGET MakePlayList POST_BUILD COMMAND ${CMAKE_COMMAND} -E rm $<TARGET_FILE_DIR:MakePlayList>/MakePlayList.ico)
+endif()
+add_custom_command(TARGET MakePlayList POST_BUILD COMMAND ${CMAKE_COMMAND} -E copy ${CMAKE_SOURCE_DIR}/MakePlayList.ico $<TARGET_FILE_DIR:MakePlayList>)
