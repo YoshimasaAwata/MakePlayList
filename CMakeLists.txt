@@ -1,6 +1,7 @@
 ﻿cmake_minimum_required(VERSION 3.19)
 project(MakePlayList VERSION 1.1.1 LANGUAGES CXX)
 
+set(CMAKE_PREFIX_PATH "C:/Qt/6.9.0/msvc2022_64")
 find_package(Qt6 6.5 REQUIRED COMPONENTS Core Widgets)
 
 string(REPLACE "." "," PROJECT_VERSION_STR "${PROJECT_VERSION}" ",0")

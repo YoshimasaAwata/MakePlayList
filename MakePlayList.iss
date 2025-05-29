@@ -2,13 +2,14 @@
 ; SEE THE DOCUMENTATION FOR DETAILS ON CREATING INNO SETUP SCRIPT FILES!
 
 #define MyAppName "MakePlayList"
-#define MyAppVersion "0.0.1"
+#define MyAppVersion "1.1.1"
 #define MyAppPublisher "yoshia"
 #define MyAppURL "https://github.com/YoshimasaAwata/MakePlayList"
 #define MyAppExeName "MakePlayList.exe"
 #define MyAppAssocName "PLS"
 #define MyAppAssocExt ".pls"
 #define MyAppAssocKey StringChange(MyAppAssocName, " ", "") + MyAppAssocExt
+#define ReDist "C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Redist\MSVC\14.42.34433\vc_redist.x64.exe"
 
 [Setup]
 ; NOTE: The value of AppId uniquely identifies this application. Do not use the same AppId value in installers for other applications.
@@ -49,9 +50,12 @@ Name: "japanese"; MessagesFile: "compiler:Languages\Japanese.isl"
 Name: "desktopicon"; Description: "{cm:CreateDesktopIcon}"; GroupDescription: "{cm:AdditionalIcons}"; Flags: unchecked
 
 [Files]
-Source: "D:\Source\Qt\MakePlayList\build\Desktop_Qt_6_9_0_MinGW_64_bit-Release\{#MyAppExeName}"; DestDir: "{app}"; Flags: ignoreversion
+Source: "D:\Source\Qt\MakePlayList\build\Desktop_Qt_6_9_0_MSVC2022_64bit-Release\{#MyAppExeName}"; DestDir: "{app}"; Flags: ignoreversion
 Source: "D:\Source\Qt\MakePlayList\deploy\*"; DestDir: "{app}"; Flags: ignoreversion recursesubdirs createallsubdirs
-Source: "D:\Source\Qt\MakePlayList\MakePlayList.ico"; DestDir: "{app}"; Flags: ignoreversion
+Source: "D:\Source\Qt\MakePlayList\MakePlayList.ico"; DestDir: "{app}";
+Source: "D:\Source\Qt\MakePlayList\LICENSE.txt"; DestDir: "{app}";
+Source: "D:\Source\Qt\MakePlayList\README.md"; DestDir: "{app}";
+Source: {#ReDist}; DestDir: "{tmp}"; Flags: deleteafterinstall
 ; NOTE: Don't use "Flags: ignoreversion" on any shared system files
 
 [Registry]
@@ -66,4 +70,4 @@ Name: "{autodesktop}\{#MyAppName}"; Filename: "{app}\{#MyAppExeName}"; Tasks: de
 
 [Run]
 Filename: "{app}\{#MyAppExeName}"; Description: "{cm:LaunchProgram,{#StringChange(MyAppName, '&', '&&')}}"; Flags: nowait postinstall skipifsilent
-
+Filename: "{tmp}\VC_redist.x64.exe"; Parameters: "/quiet /norestart"; Check: Is64BitInstallMode
