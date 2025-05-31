@@ -40,6 +40,7 @@ OutputDir=D:\Source\Qt\MakePlayList\build\Installer
 OutputBaseFilename=MakePlayListSetup
 SolidCompression=yes
 WizardStyle=modern
+ShowLanguageDialog=yes
 
 [Languages]
 Name: "english"; MessagesFile: "compiler:Default.isl"
