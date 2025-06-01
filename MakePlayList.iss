@@ -9,7 +9,7 @@
 #define MyAppAssocName "PLS"
 #define MyAppAssocExt ".pls"
 #define MyAppAssocKey StringChange(MyAppAssocName, " ", "") + MyAppAssocExt
-#define ReDist "C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Redist\MSVC\14.42.34433\vc_redist.x64.exe"
+#define ReDist "C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Redist\MSVC\v143\vc_redist.x64.exe"
 
 [Setup]
 ; NOTE: The value of AppId uniquely identifies this application. Do not use the same AppId value in installers for other applications.
