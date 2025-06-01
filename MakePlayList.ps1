@@ -1,7 +1,7 @@
 $deployFolder = '.\deploy'
 $installFolder = '.\build\installer'
-$exeFile = '.\build\Desktop_Qt_6_9_0_MinGW_64_bit-Release\MakePlayList.exe'
-$winDeployQT = 'C:\Qt\6.9.0\mingw_64\bin\windeployqt6.exe'
+$exeFile = '.\build\Desktop_Qt_6_9_0_MSVC2022_64bit-Release\MakePlayList.exe'
+$winDeployQT = 'C:\Qt\6.9.0\msvc2022_64\bin\windeployqt6.exe'
 $innoSetup = 'C:\Users\yoshia\AppData\Local\Programs\Inno Setup 6\ISCC.exe'
 $setupFile = '.\build\installer\MakePlayListSetup.exe'
 
