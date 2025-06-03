@@ -51,7 +51,7 @@ Name: "japanese"; MessagesFile: "compiler:Languages\Japanese.isl"
 Name: "desktopicon"; Description: "{cm:CreateDesktopIcon}"; GroupDescription: "{cm:AdditionalIcons}"; Flags: unchecked
 
 [Files]
-Source: "D:\Source\Qt\MakePlayList\build\Desktop_Qt_6_9_0_MSVC2022_64bit-Release\{#MyAppExeName}"; DestDir: "{app}"; Flags: ignoreversion
+Source: "D:\Source\Qt\MakePlayList\build\Desktop_Qt_6_9_1_MSVC2022_64bit-Release\{#MyAppExeName}"; DestDir: "{app}"; Flags: ignoreversion
 Source: "D:\Source\Qt\MakePlayList\deploy\*"; DestDir: "{app}"; Flags: ignoreversion recursesubdirs createallsubdirs
 Source: "D:\Source\Qt\MakePlayList\MakePlayList.ico"; DestDir: "{app}";
 Source: "D:\Source\Qt\MakePlayList\LICENSE.txt"; DestDir: "{app}";
